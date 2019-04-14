@@ -5,7 +5,9 @@ import java.io.IOException;
 public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
 
 
-    Boolean exit;
+    private static Boolean exit = false;
+
+    private CommandManager cm;
 
     public ConsoleUI(Class<E> cls) throws IOException {
         super(System.in, cls);
@@ -14,24 +16,36 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
     @Override
     public void run() {
         while (!exit) {
-            commandProcessing();
+            try {
+                commandProcessing();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
-
-    private void commandProcessing() {
-        try{
-            System.out.print(">>> ");
-            onCommand((E) getEnumReader().getCommmand());
+        try {
+            close();
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 
-    protected void onCommand(E commmand) throws IOException {}
+    private void commandProcessing() throws IOException {
+        read();
+        cm = new CommandManager();
+        cm.onCommand(getEnumReader().getCommand(), getArgs());
+        cm = null;
+        actionPerformed();
+        if (!exit)
+            System.out.print(">>> ");
+    }
+
+    protected void exit() {
+        exit = true;
+    }
 
     @Override
     public void close() throws IOException {
-        exit = true;
+        exit();
         super.close();
     }
 }

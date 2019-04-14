@@ -10,5 +10,6 @@ public enum Commands {
     CHANGEPATH,
     SHOWALL,
     TREE,
-    HELP;
+    HELP,
+    EXIT;
 }

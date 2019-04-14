@@ -12,8 +12,14 @@ public class Reader<E extends Enum<E>> implements Closeable {
 
     private EnumReader<E> enumReader;
 
-    public Reader(InputStream stream, Class<E> cls) throws IOException {
+    private Class<E> cls;
+
+    public Reader(InputStream stream, Class<E> cls) {
         reader = new BufferedReader(new InputStreamReader(stream));
+        this.cls = cls;
+    }
+
+    public void read() throws IOException {
         args = reader.readLine().split("\\s+");
         enumReader = new EnumReader<>(args[0], cls);
     }
@@ -26,12 +32,15 @@ public class Reader<E extends Enum<E>> implements Closeable {
         return enumReader;
     }
 
+    public void actionPerformed() {
+        args = new String[]{""};
+    }
+
     @Override
     public void close() throws IOException {
         reader.close();
         enumReader.close();
         enumReader = null;
         reader = null;
-        args = null;
     }
 }

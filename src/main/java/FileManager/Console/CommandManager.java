@@ -2,20 +2,24 @@ package FileManager.Console;
 
 import FileManager.Commands;
 
-import java.io.IOException;
-import java.io.InputStream;
+public class CommandManager<E extends Enum<E>> {
 
-public class CommandManager extends ConsoleUI<Commands> {
+    public CommandManager() {
 
-    public CommandManager(InputStream stream, Class cls) throws IOException {
-        super(Commands.class);
     }
 
-    @Override
-    protected void onCommand(Commands command) throws IOException {
-        switch (command) {
-            case COPY: throw new UnsupportedOperationException();
-            //TODO() Switch with commands
+    protected void onCommand(E command, String[] s) {
+        switch ((Commands) command) {
+            case EXIT: ConsoleUI.exit = true;
+            break;
         }
+    }
+
+    public void exit() {
+        exit = true;
+    }
+
+    public Boolean getExit() {
+        return exit;
     }
 }
