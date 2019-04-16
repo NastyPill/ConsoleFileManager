@@ -19,7 +19,7 @@ public class EnumReader<E extends Enum<E>> implements Closeable {
         try {
             return E.valueOf(cls, command);
         } catch (IllegalArgumentException e) {
-            throw new IllegalAccessError("No such command");
+            throw e;
         }
     }
 

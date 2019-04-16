@@ -1,20 +1,38 @@
 package FileManager.Console;
 
+import FileManager.Actions.ChangePathAction;
+import FileManager.Actions.FileCopyAction;
+import FileManager.Actions.FileDeleteAction;
+import FileManager.Actions.HelpAction;
+import FileManager.Commands;
+
 import java.io.IOException;
 
 public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
 
+    //Colors for text
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
 
-    private static Boolean exit = false;
+    private Boolean exit = false;
 
-    private CommandManager cm;
+    private String currentDir;
 
     public ConsoleUI(Class<E> cls) throws IOException {
         super(System.in, cls);
+        currentDir = System.getProperty("user.dir");
     }
 
     @Override
     public void run() {
+        System.out.println(ANSI_GREEN + currentDir + ANSI_RESET);
         while (!exit) {
             try {
                 commandProcessing();
@@ -22,6 +40,7 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
                 e.printStackTrace();
             }
         }
+
         try {
             close();
         } catch (IOException e) {
@@ -31,12 +50,42 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
 
     private void commandProcessing() throws IOException {
         read();
-        cm = new CommandManager();
-        cm.onCommand(getEnumReader().getCommand(), getArgs());
-        cm = null;
+        try {
+            onCommand((E) getEnumReader().getCommand(), getArgs());
+        } catch (IllegalArgumentException e) {
+            System.out.println(ANSI_RED + "No such command, type 'help'" + ANSI_RESET);
+        }
         actionPerformed();
-        if (!exit)
-            System.out.print(">>> ");
+        System.out.println(ANSI_GREEN + currentDir + ANSI_RESET);
+    }
+
+    protected void onCommand(E command, String[] args) {
+        if (!(command instanceof Commands)) {
+            throw new IllegalArgumentException();
+        }
+        Commands commands = (Commands) command;
+        switch (commands) {
+            case EXIT:
+                exit();
+                break;
+
+            case COPY:
+                new FileCopyAction(args).start();
+                break;
+
+            case HELP:
+                new HelpAction().start();
+                break;
+
+            case DELETE:
+                new FileDeleteAction(args).start();
+                break;
+
+            case CP: {
+                currentDir = new ChangePathAction().start(currentDir, args);
+            }
+            break;
+        }
     }
 
     protected void exit() {
@@ -45,7 +94,6 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
 
     @Override
     public void close() throws IOException {
-        exit();
         super.close();
     }
 }

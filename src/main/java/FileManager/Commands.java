@@ -2,14 +2,14 @@ package FileManager;
 
 public enum Commands {
     COPY,
-    FILEMOVE,
+    MOVE,
     DELETE,
     FIND,
     META,
     RENAME,
-    CHANGEPATH,
+    CP,
     SHOWALL,
     TREE,
     HELP,
-    EXIT;
+    EXIT
 }
