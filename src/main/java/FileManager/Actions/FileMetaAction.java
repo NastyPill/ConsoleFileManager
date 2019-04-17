@@ -5,10 +5,9 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class FileMetaAction implements Action {
 
@@ -53,26 +52,37 @@ public class FileMetaAction implements Action {
         System.out.println("size: " + folderSize(new File(path)) + " bytes" + ANSI_RESET);
     }
 
-
-    //isn't safety can return null or throw NullPointerException
     private long folderSize(File dir) {
-        long len = 0;
+        final AtomicLong size = new AtomicLong(0);
+
         try {
-            for (File file : dir.listFiles()) {
-                if (!file.canRead()) {
-                } else {
-                    if (file.isFile()) {
-                        len += file.length();
-                    } else {
-                        len += folderSize(file);
-                    }
+            Files.walkFileTree(dir.toPath(), new SimpleFileVisitor<Path>(){
+
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    size.addAndGet(attrs.size());
+                    return FileVisitResult.CONTINUE;
                 }
-            }
-            return len;
-        } catch (NullPointerException e) {
-            System.out.println(ANSI_RED + "Can't calculate size accurately because some files are unreadable" + ANSI_PURPLE);
+
+                @Override
+                public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+                    System.out.println(ANSI_RED + "Skipped file: " + file + " (" + exc +")" + ANSI_RESET);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    if (exc != null) {
+                        System.out.println(ANSI_RED + "Have some trouble" + dir + " (" + exc +")" + ANSI_RESET);
+                    }
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+
+        } catch (IOException e) {
+            //nothing
         }
-        return 0;
+        return size.get();
     }
 
     @Override
