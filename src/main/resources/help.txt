@@ -1,12 +1,45 @@
-afasf
-asdf
-asd
-fads
-fads
-f
-a
-
-
-asdfasdfasdf
-asdf
-end.
+||==============================================||
+||help - shows you commands and their usages    ||
+||==============================================||
+||copy - copying file from one directory to     ||
+||another                                       ||
+||                                              ||
+||Usage: copy <path_from> <path_to>             ||
+||==============================================||
+||move = moves file from one dir to another     ||
+||                                              ||
+||Usage: move <path_from> <path_to>             ||
+||==============================================||
+||cd - change directory                         ||
+||                                              ||
+||Usage: cd <path> OR cd <directory_name>       ||
+||==============================================||
+||delete - deleting file                        ||
+||                                              ||
+||Usage: delete <path> OR delete <file_name>    ||
+||==============================================||
+||find - find a file in your file system        ||
+||                                              ||
+||Usage: find <name> OR fine <name> <from dir>  ||
+||==============================================||
+||meta - shows you information about file       ||
+||                                              ||
+||Usage: meta(meta about directory you are in)  ||
+|| OR meta <path>                               ||
+||==============================================||
+||rename - renames file                         ||
+||                                              ||
+||Usage: rename <name> <new_name> OR            ||
+||       rename <path> <new_name>               ||
+||==============================================||
+||showall - shows you all files in current dir  ||
+||                                              ||
+||Usage: showall                                ||
+||==============================================||
+||tree - show you all files from the current dir||
+||                                              ||
+||Usage: tree OR tree<path>(shows tree from this||
+||       directory)                             ||
+||==============================================||
+||exit - closes the program                     ||
+||==============================================||

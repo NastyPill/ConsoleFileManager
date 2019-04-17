@@ -1,6 +1,6 @@
 package FileManager.Actions;
 
-public class FileFindAction implements Action{
+public class FileFindAction implements Action {
     @Override
     public void close() throws Exception {
 
@@ -8,6 +8,6 @@ public class FileFindAction implements Action{
 
     @Override
     public void run() {
-
+        //TODO();
     }
 }

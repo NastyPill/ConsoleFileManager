@@ -15,7 +15,6 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
     private Boolean exit = false;
@@ -78,13 +77,25 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
                 new FileDeleteAction(args, currentDir).start();
                 break;
 
-            case CP: {
+            case CD:
                 currentDir = new ChangePathAction().start(currentDir, args);
-            }
-            break;
+                break;
 
-            case SHOWALL: new ShowAllFilesAction(currentDir).start();
-            break;
+            case SHOWALL:
+                new ShowAllFilesAction(currentDir).start();
+                break;
+
+            case META:
+                new FileMetaAction(args, currentDir).start();
+                break;
+
+            case MOVE:
+                new FileMoveAction(args, currentDir).start();
+                break;
+
+            case RENAME:
+                new FileRenameAction(args, currentDir).start();
+                break;
         }
     }
 

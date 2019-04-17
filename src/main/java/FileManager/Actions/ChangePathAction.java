@@ -9,9 +9,12 @@ public class ChangePathAction {
 
     public String start(String currentPath, String[] args) {
         String path;
+        if (args.length != 2) {
+            throw new IllegalArgumentException();
+        }
         if (args[1].charAt(0) == '/') {
             path = args[1];
-        } else  {
+        } else {
             path = currentPath + "/" + args[1];
         }
 

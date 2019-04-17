@@ -4,13 +4,15 @@ import java.io.*;
 
 public class HelpAction implements Action {
 
+    public static final String ANSI_CYAN = "\u001B[36m";
+
     @Override
     public void run() {
         String path = getClass().getClassLoader().getResource("help.txt").getPath();
-        try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)))) {
             String line = br.readLine();
             while (line != null) {
-                System.out.println(ANSI_GREEN + line + ANSI_RESET);
+                System.out.println(ANSI_CYAN + line + ANSI_RESET);
                 line = br.readLine();
             }
         } catch (FileNotFoundException e) {

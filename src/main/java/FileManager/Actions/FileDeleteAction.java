@@ -1,7 +1,5 @@
 package FileManager.Actions;
 
-import jdk.internal.jline.internal.Ansi;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

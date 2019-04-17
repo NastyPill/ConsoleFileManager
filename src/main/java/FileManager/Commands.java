@@ -7,7 +7,7 @@ public enum Commands {
     FIND,
     META,
     RENAME,
-    CP,
+    CD,
     SHOWALL,
     TREE,
     HELP,

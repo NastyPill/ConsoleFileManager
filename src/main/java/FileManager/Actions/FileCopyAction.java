@@ -28,7 +28,8 @@ public class FileCopyAction implements Action {
         if (errMessage1 != null && errMessage2 != null) {
             if (errMessage1 == null) {
                 errMessage1 = "";
-            } if (errMessage2 == null) {
+            }
+            if (errMessage2 == null) {
                 errMessage2 = "";
             }
             System.out.println(ANSI_RED + errMessage1 + " " + errMessage2 + ANSI_RESET);
