@@ -17,8 +17,4 @@ public interface Action extends Runnable, AutoCloseable {
         };
         task.run();
     }
-
-
-
-
 }

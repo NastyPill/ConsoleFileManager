@@ -9,20 +9,24 @@ import java.nio.file.Path;
 
 public class FileDeleteAction implements Action {
 
-    String file;
+    private String from;
 
-    public FileDeleteAction(String[] args) {
+    private Validator validator;
+
+    public FileDeleteAction(String[] args, String currentDir) {
+        validator = new Validator();
         if (args.length != 2) {
             throw new IllegalArgumentException();
         } else {
-            file = args[1];
+            this.from = validator.isPath(args[1], currentDir);
         }
     }
 
     @Override
     public void run() {
-        Path p = new File(file).toPath();
-        String errMessage = new Validator().validate(p.toString());
+        File file = new File(from);
+        Path p = file.toPath();
+        String errMessage = validator.validate(p.toString());
         if (errMessage != null) {
             System.out.println(ANSI_RED + errMessage + ANSI_RESET);
             return;
@@ -30,7 +34,7 @@ public class FileDeleteAction implements Action {
             try {
                 Files.delete(p);
             } catch (IOException e) {
-                if (!new File(file).exists()) {
+                if (!file.exists()) {
                     System.out.println(ANSI_RED + "This file doesn't exist" + ANSI_RESET);
                 } else {
                     System.out.println(ANSI_RED + "You have no rights to delete this file" + ANSI_RESET);

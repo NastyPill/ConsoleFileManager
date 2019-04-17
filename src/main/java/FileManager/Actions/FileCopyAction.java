@@ -10,19 +10,28 @@ public class FileCopyAction implements Action {
 
     private String from, to;
 
-    public FileCopyAction(String[] args) {
+    private Validator validator;
+
+    public FileCopyAction(String[] args, String currentDir) {
+        validator = new Validator();
         if (args.length != 3) {
             throw new IllegalArgumentException();
         } else {
-            this.from = args[1];
-            this.to = args[2];
+            this.from = validator.isPath(args[1], currentDir);
+            this.to = validator.isPath(args[2], currentDir);
         }
     }
 
     private void copyFile(String from, String to) throws IOException {
-        String errMessage = new Validator().validate(from) + "\n" + new Validator().validate(to);
-        if (!errMessage.equalsIgnoreCase("\n")) {
-            System.out.println(ANSI_RED + errMessage + ANSI_RESET);
+        String errMessage1 = validator.validate(from);
+        String errMessage2 = validator.validate(to);
+        if (errMessage1 != null && errMessage2 != null) {
+            if (errMessage1 == null) {
+                errMessage1 = "";
+            } if (errMessage2 == null) {
+                errMessage2 = "";
+            }
+            System.out.println(ANSI_RED + errMessage1 + " " + errMessage2 + ANSI_RESET);
         } else {
             Path pFrom = new File(from).toPath();
             File fileTo = new File(to);

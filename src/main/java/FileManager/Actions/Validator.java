@@ -16,8 +16,14 @@ public class Validator {
             return f.getName() + " isn't writable";
         }
         return null;
+    }
 
-
+    protected String isPath(String arg, String currentDir) {
+        if (arg.charAt(0) != '/') {
+            return currentDir + "/" + arg;
+        } else {
+            return arg;
+        }
     }
 
 }

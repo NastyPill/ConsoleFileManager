@@ -15,8 +15,9 @@ public class ChangePathAction {
             path = currentPath + "/" + args[1];
         }
 
-        if (!new File(path).exists()) {
-            System.out.println(ANSI_RED + new File(path).getAbsolutePath() + " doesn't exist" + ANSI_RESET);
+        File file = new File(path);
+        if (!file.exists() || !file.isDirectory()) {
+            System.out.println(ANSI_RED + "Such directory " + file.getAbsolutePath() + " doesn't exist" + ANSI_RESET);
             return currentPath;
         } else {
             if (path.charAt(path.length() - 1) == '/') {

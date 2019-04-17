@@ -1,9 +1,6 @@
 package FileManager.Console;
 
-import FileManager.Actions.ChangePathAction;
-import FileManager.Actions.FileCopyAction;
-import FileManager.Actions.FileDeleteAction;
-import FileManager.Actions.HelpAction;
+import FileManager.Actions.*;
 import FileManager.Commands;
 
 import java.io.IOException;
@@ -70,7 +67,7 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
                 break;
 
             case COPY:
-                new FileCopyAction(args).start();
+                new FileCopyAction(args, currentDir).start();
                 break;
 
             case HELP:
@@ -78,12 +75,15 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
                 break;
 
             case DELETE:
-                new FileDeleteAction(args).start();
+                new FileDeleteAction(args, currentDir).start();
                 break;
 
             case CP: {
                 currentDir = new ChangePathAction().start(currentDir, args);
             }
+            break;
+
+            case SHOWALL: new ShowAllFilesAction(currentDir).start();
             break;
         }
     }
