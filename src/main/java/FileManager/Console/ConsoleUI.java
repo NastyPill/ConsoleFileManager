@@ -14,7 +14,6 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
     private Boolean exit = false;
@@ -95,6 +94,10 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
 
             case RENAME:
                 new FileRenameAction(args, currentDir).start();
+                break;
+
+            case FIND:
+                new FileFindAction(args, currentDir).start();
                 break;
         }
     }

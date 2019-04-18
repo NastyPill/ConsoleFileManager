@@ -12,7 +12,14 @@ public class ChangePathAction {
         if (args.length != 2) {
             throw new IllegalArgumentException();
         }
-        if (args[1].charAt(0) == '/') {
+        args[1].trim();
+        if (args[1].equalsIgnoreCase("~")) {
+            if(currentPath.substring(1).contains("/")) {
+                path = currentPath.substring(0, currentPath.indexOf('/', 1));
+            } else {
+                path = currentPath;
+            }
+        } else if (args[1].charAt(0) == '/') {
             path = args[1];
         } else {
             path = currentPath + "/" + args[1];

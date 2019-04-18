@@ -1,7 +1,7 @@
 package FileManager.Actions;
 
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
@@ -27,12 +27,10 @@ public class FileMoveAction implements Action {
     public void run() {
         String errMessage1 = validator.validate(from);
         String errMessage2 = validator.validate(to);
-        if (errMessage1 != null && errMessage2 != null) {
-            try {
-                Files.move(Paths.get(from), Paths.get(to), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                e.printStackTrace(System.err);
-            }
+        if (errMessage1 == null && errMessage2 == null) {
+            File fileFrom = new File(from);
+            File fileTo = new File(to + "/" + fileFrom.getName());
+            fileFrom.renameTo(fileTo);
         } else {
             if (errMessage1 == null) {
                 errMessage1 = "";

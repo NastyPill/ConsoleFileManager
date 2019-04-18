@@ -1,10 +1,7 @@
 package FileManager.Actions;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.io.File;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.concurrent.atomic.AtomicLong;
