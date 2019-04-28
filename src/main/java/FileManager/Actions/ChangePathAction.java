@@ -26,7 +26,7 @@ public class ChangePathAction {
         }
 
         File file = new File(path);
-        if (!file.exists() || !file.isDirectory()) {
+        if (!file.exists() || !file.isDirectory() || args[1].equals("/")) {
             System.out.println(ANSI_RED + "Such directory " + file.getAbsolutePath() + " doesn't exist" + ANSI_RESET);
             return currentPath;
         } else {

@@ -4,8 +4,6 @@ import java.io.*;
 
 public class HelpAction implements Action {
 
-    public static final String ANSI_CYAN = "\u001B[36m";
-
     @Override
     public void run() {
         String path = getClass().getClassLoader().getResource("help.txt").getPath();

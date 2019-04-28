@@ -8,8 +8,6 @@ import java.util.ArrayList;
 
 public class FileFindAction implements Action {
 
-    public static final String ANSI_PURPLE = "\u001B[35m";
-
     private ArrayList<File> listOfFiles;
 
     private String name;
@@ -22,7 +20,7 @@ public class FileFindAction implements Action {
         }
         this.name = args[1];
         this.currentDir = currentDir;
-        listOfFiles = new ArrayList<>();
+        this.listOfFiles = new ArrayList<>();
     }
 
     @Override
@@ -32,9 +30,6 @@ public class FileFindAction implements Action {
 
                 @Override
                 public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    if (file.toFile().getName().equalsIgnoreCase(name)) {
-                        listOfFiles.add(file.toFile());
-                    }
                     return FileVisitResult.CONTINUE;
                 }
 
@@ -48,6 +43,13 @@ public class FileFindAction implements Action {
                 public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
                     if (exc != null) {
                         System.out.println(ANSI_RED + "Have some trouble" + dir + " (" + exc + ")" + ANSI_RESET);
+                        return FileVisitResult.CONTINUE;
+                    }
+                    File[] arrOfFiles = dir.toFile().listFiles();
+                    for (File file : arrOfFiles) {
+                        if (file.getName().equals(name)) {
+                            listOfFiles.add(file);
+                        }
                     }
                     return FileVisitResult.CONTINUE;
                 }
@@ -58,12 +60,12 @@ public class FileFindAction implements Action {
         if (listOfFiles.isEmpty()) {
             System.out.println(ANSI_RED + "No such file with name: " + name + ANSI_RESET);
         }
-        for (File file: listOfFiles) {
+        for (File file : listOfFiles) {
             System.out.println(ANSI_PURPLE + file.getAbsolutePath() + ANSI_RESET);
         }
     }
 
-        @Override
+    @Override
     public void close() throws Exception {
 
     }

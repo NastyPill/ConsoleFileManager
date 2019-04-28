@@ -12,7 +12,8 @@
 ||==============================================||
 ||cd - change directory                         ||
 ||                                              ||
-||Usage: cd <path> OR cd <directory_name>       ||
+||Usage: cd <path> OR cd <directory_name> OR    ||
+||       cd ~ goes to root                      ||
 ||==============================================||
 ||delete - deleting file                        ||
 ||                                              ||
@@ -20,12 +21,12 @@
 ||==============================================||
 ||find - find a file in your file system        ||
 ||                                              ||
-||Usage: find <name> OR fine <name> <from dir>  ||
+||Usage: find <name>                            ||
 ||==============================================||
 ||meta - shows you information about file       ||
 ||                                              ||
 ||Usage: meta(meta about directory you are in)  ||
-|| OR meta <path>                               ||
+||          OR meta <path>                      ||
 ||==============================================||
 ||rename - renames file                         ||
 ||                                              ||
@@ -38,8 +39,7 @@
 ||==============================================||
 ||tree - show you all files from the current dir||
 ||                                              ||
-||Usage: tree OR tree<path>(shows tree from this||
-||       directory)                             ||
+||Usage: tree                                   ||
 ||==============================================||
 ||exit - closes the program                     ||
 ||==============================================||

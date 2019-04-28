@@ -1,9 +1,8 @@
 package FileManager.Actions;
 
+import FileManager.Utils.Validator;
+
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 public class FileMoveAction implements Action {
 

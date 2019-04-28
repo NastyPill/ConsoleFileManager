@@ -99,6 +99,10 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
             case FIND:
                 new FileFindAction(args, currentDir).start();
                 break;
+
+            case TREE:
+                new TreeAction(currentDir).start();
+                break;
         }
     }
 

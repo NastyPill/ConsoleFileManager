@@ -1,10 +1,10 @@
-package FileManager.Actions;
+package FileManager.Utils;
 
 import java.io.File;
 
 public class Validator {
 
-    protected String validate(String path) {
+    public String validate(String path) {
         File f = new File(path);
         if (!f.exists()) {
             return f.getName() + " doesn't exist";
@@ -18,7 +18,7 @@ public class Validator {
         return null;
     }
 
-    protected String isPath(String arg, String currentDir) {
+    public String isPath(String arg, String currentDir) {
         if (arg.charAt(0) != '/') {
             return currentDir + "/" + arg;
         } else {

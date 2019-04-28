@@ -1,5 +1,7 @@
 package FileManager.Actions;
 
+import FileManager.Utils.Validator;
+
 import java.io.File;
 
 public class FileRenameAction implements Action {

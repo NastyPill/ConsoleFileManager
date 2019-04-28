@@ -1,5 +1,7 @@
 package FileManager.Actions;
 
+import FileManager.Utils.Validator;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
@@ -7,9 +9,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class FileMetaAction implements Action {
-
-    public static final String ANSI_BOLD = "\u001B[1m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
 
     private String path;
 
