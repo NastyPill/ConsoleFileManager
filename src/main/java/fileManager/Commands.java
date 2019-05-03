@@ -1,4 +1,4 @@
-package FileManager;
+package fileManager;
 
 public enum Commands {
     COPY,

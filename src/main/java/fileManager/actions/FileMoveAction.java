@@ -1,6 +1,6 @@
-package FileManager.Actions;
+package fileManager.actions;
 
-import FileManager.Utils.Validator;
+import fileManager.utils.Validator;
 
 import java.io.File;
 

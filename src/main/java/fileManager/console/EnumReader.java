@@ -1,4 +1,4 @@
-package FileManager.Console;
+package fileManager.console;
 
 //Waiting for the 1st argument from console
 

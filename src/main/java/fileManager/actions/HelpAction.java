@@ -1,4 +1,4 @@
-package FileManager.Actions;
+package fileManager.actions;
 
 import java.io.*;
 
@@ -14,7 +14,7 @@ public class HelpAction implements Action {
                 line = br.readLine();
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Sorry help file was lost :(");
+            System.out.println("Sorry help.txt file was lost :(");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

@@ -1,4 +1,4 @@
-package FileManager.Actions;
+package fileManager.actions;
 
 public interface Action extends Runnable, AutoCloseable {
 

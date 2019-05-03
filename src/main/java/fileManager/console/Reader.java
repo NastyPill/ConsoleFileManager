@@ -1,4 +1,4 @@
-package FileManager.Console;
+package fileManager.console;
 
 import java.io.*;
 

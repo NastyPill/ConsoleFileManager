@@ -1,4 +1,4 @@
-package FileManager.Utils;
+package fileManager.utils;
 
 import java.io.File;
 

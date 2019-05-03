@@ -1,10 +1,7 @@
-package FileManager.Actions;
+package fileManager.actions;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
-
-import static FileManager.Console.ConsoleUI.*;
 
 public class ShowAllFilesAction implements Action {
 

@@ -1,4 +1,4 @@
-package FileManager.Actions;
+package fileManager.actions;
 
 import java.io.File;
 

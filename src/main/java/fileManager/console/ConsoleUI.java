@@ -1,27 +1,24 @@
-package FileManager.Console;
+package fileManager.console;
 
-import FileManager.Actions.*;
-import FileManager.Commands;
+import fileManager.actions.*;
+import fileManager.Commands;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
 
     //Colors for text
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_WHITE = "\u001B[37m";
 
     private Boolean exit = false;
 
     private String currentDir;
 
-    public ConsoleUI(Class<E> cls) throws IOException {
-        super(System.in, cls);
+    public ConsoleUI(Class<E> cls, InputStream stream) throws IOException {
+        super(stream, cls);
         currentDir = System.getProperty("user.dir");
     }
 
@@ -48,7 +45,7 @@ public class ConsoleUI<E extends Enum<E>> extends Reader implements Runnable {
         try {
             onCommand((E) getEnumReader().getCommand(), getArgs());
         } catch (IllegalArgumentException e) {
-            System.out.println(ANSI_RED + "No such command, type 'help'" + ANSI_RESET);
+            System.out.println(ANSI_RED + "No such command, type 'fileManager'" + ANSI_RESET);
         }
         actionPerformed();
         System.out.println(ANSI_GREEN + currentDir + ANSI_RESET);
