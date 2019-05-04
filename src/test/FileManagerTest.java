@@ -5,10 +5,17 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 public class FileManagerTest {
+
+    @Test
+    public void test() {
+        copyTest();
+        moveTest();
+        deleteTest();
+        renameTest();
+    }
 
     public void createFiles(){
         File file = new File(System.getProperty("user.dir") + "/txt.txt");
@@ -54,7 +61,7 @@ public class FileManagerTest {
     }
 
     @Test
-    public void removeTest() throws IOException {
+    public void renameTest() throws IOException {
         createFiles();
         Action action = new FileRenameAction("rename txt.txt txt1.txt".split(" "), System.getProperty("user.dir"));
         action.start();
